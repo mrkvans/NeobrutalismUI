@@ -3,10 +3,6 @@
 
 import SwiftUI
 
-// Export view modifiers directly
-@_exported import struct NeoBrutalAlert
-@_exported import struct NeoBrutalModal
-@_exported import struct NeoBrutalToast
 // Core
 @_exported import struct SwiftUI.Color
 @_exported import protocol SwiftUI.View
