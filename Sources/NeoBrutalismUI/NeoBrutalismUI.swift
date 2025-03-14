@@ -27,4 +27,8 @@ extension View {
         public func neoBrutalToggleStyle() -> some View {
                 self.toggleStyle(NeoBrutalToggleStyle())
         }
+
+        public func neoBrutalProgressViewStyle() -> some View {
+                self.progressViewStyle(NeoBrutalProgressViewStyle())
+        }
 }
