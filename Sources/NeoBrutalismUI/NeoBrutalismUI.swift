@@ -3,6 +3,10 @@
 
 import SwiftUI
 
+// Export view modifiers directly
+@_exported import struct NeoBrutalAlert
+@_exported import struct NeoBrutalModal
+@_exported import struct NeoBrutalToast
 // Core
 @_exported import struct SwiftUI.Color
 @_exported import protocol SwiftUI.View
@@ -14,7 +18,17 @@ public typealias NeoBrutalTextField = NeoBrutalTextFieldStyle
 public typealias NeoBrutalToggle = NeoBrutalToggleStyle
 public typealias NeoBrutalProgress = NeoBrutalProgressViewStyle
 
-// View Modifiers
-public typealias NeoBrutalAlertModifier = NeoBrutalAlertModifier
-public typealias NeoBrutalToastModifier = NeoBrutalToastModifier
-public typealias NeoBrutalModalModifier = NeoBrutalModalModifier
+// Convenient modifiers
+extension View {
+        public func neoBrutalButtonStyle() -> some View {
+                self.buttonStyle(NeoBrutalButtonStyle())
+        }
+
+        public func neoBrutalTextFieldStyle() -> some View {
+                self.textFieldStyle(NeoBrutalTextFieldStyle())
+        }
+
+        public func neoBrutalToggleStyle() -> some View {
+                self.toggleStyle(NeoBrutalToggleStyle())
+        }
+}
