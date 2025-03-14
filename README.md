@@ -4,8 +4,6 @@
 
 Welcome to NeoBrutalismUI – where minimalism meets maximalism, and your apps stop whispering and start SHOUTING! This SwiftUI package brings the bold, unapologetic aesthetic of Neobrutalism to your apps, because let's face it: in a world of flat designs and gentle shadows, sometimes you need to punch through the noise with some bold boxes and thicc borders.
 
-![Neobrutalism Example](https://your-image-url-here.com) _(Coming soon!)_
-
 ## 🚀 Why NeoBrutalismUI?
 
 - **Stand Out**: In a sea of neumorphic sameness, be the bold splash of color that makes users go "Whoa!"
@@ -31,108 +29,140 @@ dependencies: [
 ]
 ```
 
-## 🎨 The Brutal Toolkit
+Or in Xcode:
+1. File > Add Package Dependencies
+2. Enter: `https://github.com/mrkvans/NeobrutalismUI.git`
+3. Click "Add Package"
 
-### Core Stuff (The Basics)
-- `NeoBrutalColors` - A color palette that makes Material Design look shy
-- `NeoBrutalTheme` - Because customization is not a crime
+## 🎨 Usage
 
-### Components (The Fun Part)
-- 🔘 Buttons that LOOK like buttons (revolutionary, we know)
-- 📝 Text fields that aren't afraid of borders
-- 🔄 Toggles that toggle with attitude
-- 📊 Progress bars that actually show progress
-- 🎴 Cards that don't apologize for their shadows
-- ✅ Checkboxes that check with style
-- 🔘 Radio buttons that radiate confidence
-- 🎚 Sliders that slide with swagger
-- 🔢 Steppers that step with purpose
-- 📑 Fieldsets that field with finesse
-
-### Overlay Components (The Fancy Stuff)
-- ⚠️ Alerts that actually alert
-- 🍞 Toasts that pop (not burn)
-- 🪟 Modals that demand attention
-
-### Navigation (The Moving Parts)
-- 📑 TabView that tabs like it means it
-
-## 🎮 Usage
-
-### The Setup (Easy as 1-2-3)
+First, import the package:
 
 ```swift
+import SwiftUI
 import NeoBrutalismUI
+```
 
+### Method 1: Using Convenient Modifiers (Recommended)
+
+```swift
 struct ContentView: View {
-    // Create a theme that screams "I know what I'm doing!"
-    let myTheme: NeoBrutalTheme = {
-        var theme = NeoBrutalTheme()
-        theme.cornerRadius = 8 // Because corners need personality too
-        theme.outlineWidth = 4 // Thicc borders = more fun
-        theme.primaryColor = NeoBrutalColors.tertiary // Be bold or be boring
-        theme.shadowRadius = 5 // Shadows that mean business
-        theme.shadowOffset = CGSize(width: 4, height: 4) // Because flat is flat
-        theme.shadowColor = Color.black.opacity(0.2) // Just the right amount of drama
-        return theme
-    }()
-
+    @State private var text = ""
+    @State private var isEnabled = false
+    
     var body: some View {
-        NavigationStack {
-            // Your masterpiece goes here
+        VStack(spacing: 20) {
+            // Button with neobrutalist style
+            Button("Click Me!") {
+                // Your action here
+            }
+            .neoBrutalButtonStyle()
+            
+            // TextField with neobrutalist style
+            TextField("Enter text", text: $text)
+                .neoBrutalTextFieldStyle()
+            
+            // Toggle with neobrutalist style
+            Toggle("Enable Feature", isOn: $isEnabled)
+                .neoBrutalToggleStyle()
+            
+            // Card with neobrutalist style
+            NeoBrutalCard {
+                Text("I'm a card!")
+                Text("With multiple lines!")
+            }
         }
-        .neoBrutalTheme(myTheme) // Dress for success
+        .padding()
     }
 }
 ```
 
-### Show Me The Components! 
+### Method 2: Using Traditional SwiftUI Style Application
 
 ```swift
-// A button that looks like a button (shocking!)
-Button("Smash Me!") {
-    print("Ouch!")
-}
-.buttonStyle(NeoBrutalButtonStyle())
-
-// A text field that isn't trying to hide
-TextField("Type something brutal", text: $text)
-    .textFieldStyle(NeoBrutalTextFieldStyle())
-
-// A toggle that doesn't do subtle
-Toggle("Unleash the beast", isOn: $isEnabled)
-    .toggleStyle(NeoBrutalToggleStyle())
-
-// A card that holds its ground
-NeoBrutalCard {
-    Text("I'm not trapped in here with you...")
-    Text("You're trapped in here with me!")
-}
-
-// An alert that demands attention
-.neoBrutalAlert(isPresented: $showAlert) {
-    Text("THIS IS AN ALERT!")
+struct ContentView: View {
+    @State private var text = ""
+    @State private var isEnabled = false
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            // Button with neobrutalist style
+            Button("Click Me!") {
+                // Your action here
+            }
+            .buttonStyle(NeoBrutalButtonStyle())
+            
+            // TextField with neobrutalist style
+            TextField("Enter text", text: $text)
+                .textFieldStyle(NeoBrutalTextFieldStyle())
+            
+            // Toggle with neobrutalist style
+            Toggle("Enable Feature", isOn: $isEnabled)
+                .toggleStyle(NeoBrutalToggleStyle())
+            
+            // Card with neobrutalist style
+            NeoBrutalCard {
+                Text("I'm a card!")
+                Text("With multiple lines!")
+            }
+        }
+        .padding()
+    }
 }
 ```
 
-## 🎨 Customization
+### 🎨 Customizing the Theme
 
-Make it yours! Because who doesn't love a good makeover?
+Create a custom theme to make the components match your app's style:
 
 ```swift
-var theme = NeoBrutalTheme()
-theme.primaryColor = .red // Go bold or go home
-theme.outlineWidth = 3 // Thicc is the new thin
-theme.cornerRadius = 8 // Corners with character
-theme.shadowOffset = CGSize(width: 4, height: 4) // Drop it like it's hot
+let myTheme = NeoBrutalTheme()
+myTheme.cornerRadius = 8          // Round those corners (or don't, you do you)
+myTheme.outlineWidth = 4          // Thicc borders = more fun
+myTheme.primaryColor = .red       // Be bold!
+myTheme.shadowRadius = 5          // Shadows that mean business
+myTheme.shadowOffset = CGSize(width: 4, height: 4)  // Because flat is flat
+myTheme.shadowColor = Color.black.opacity(0.2)      // Just the right amount of drama
+
+// Apply the theme to your view hierarchy
+YourView()
+    .neoBrutalTheme(myTheme)
 ```
 
-## 🏃‍♂️ Ready to Get Started?
+### Available Components
 
-1. Install the package (you've got this!)
-2. Import NeoBrutalismUI (the easy part)
-3. Start building (the fun part)
-4. Watch your users' jaws drop (the best part)
+#### Core Components
+- `NeoBrutalButtonStyle` / `.neoBrutalButtonStyle()`
+- `NeoBrutalTextFieldStyle` / `.neoBrutalTextFieldStyle()`
+- `NeoBrutalToggleStyle` / `.neoBrutalToggleStyle()`
+- `NeoBrutalProgressViewStyle` / `.neoBrutalProgressViewStyle()`
+
+#### Container Components
+- `NeoBrutalCard`
+- `NeoBrutalFieldset`
+
+#### Form Components
+- `NeoBrutalCheckbox`
+- `NeoBrutalRadioButton`
+- `NeoBrutalRadioGroup`
+- `NeoBrutalSlider`
+- `NeoBrutalStepper`
+
+#### Navigation Components
+- `NeoBrutalTabView`
+
+## 🎨 Colors
+
+The package includes a set of predefined colors that follow the neobrutalist aesthetic:
+
+```swift
+NeoBrutalColors.primary    // A bold red (#FF5C5C)
+NeoBrutalColors.secondary  // Vibrant yellow (#F9C846)
+NeoBrutalColors.tertiary   // Teal accent (#29A19C)
+NeoBrutalColors.outline    // Usually black
+NeoBrutalColors.background // Clean white
+NeoBrutalColors.text      // Clear black
+```
 
 ## 📜 License
 
