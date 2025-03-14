@@ -1,21 +1,24 @@
 import SwiftUI
 
-public struct NeoBrutalRadioButton: View {
-        let label: String
+public struct NeoBrutalRadioButton<Label: View>: View {
         @Binding var isSelected: Bool
+        let label: Label
+        let action: () -> Void
 
         @Environment(\.neoBrutalTheme) private var theme
 
-        public init(label: String, isSelected: Binding<Bool>) {
-                self.label = label
+        public init(
+                isSelected: Binding<Bool>, action: @escaping () -> Void,
+                @ViewBuilder label: () -> Label
+        ) {
                 self._isSelected = isSelected
+                self.action = action
+                self.label = label()
         }
 
         public var body: some View {
-                HStack {
-                        Button(action: {
-                                isSelected.toggle()
-                        }) {
+                Button(action: action) {
+                        HStack {
                                 ZStack {
                                         Circle()
                                                 .fill(theme.backgroundColor)
@@ -34,33 +37,37 @@ public struct NeoBrutalRadioButton: View {
                                                         .frame(width: 12, height: 12)
                                         }
                                 }
-                        }
-                        .buttonStyle(.plain)
 
-                        Text(label)
-                                .foregroundColor(theme.textColor)
+                                label
+                                        .foregroundColor(theme.textColor)
+                        }
                 }
+                .buttonStyle(.plain)
         }
 }
 
-public struct NeoBrutalRadioGroup: View {
-        @Binding var selected: String
-        let options: [String]
+public struct NeoBrutalRadioGroup<T: Hashable>: View {
+        @Binding var selection: T
+        let options: [(T, String)]
 
-        public init(selected: Binding<String>, options: [String]) {
-                self._selected = selected
+        @Environment(\.neoBrutalTheme) private var theme
+
+        public init(selection: Binding<T>, options: [(T, String)]) {
+                self._selection = selection
                 self.options = options
         }
 
         public var body: some View {
                 VStack(alignment: .leading, spacing: 8) {
-                        ForEach(options, id: \.self) { option in
+                        ForEach(options, id: \.0) { option in
                                 NeoBrutalRadioButton(
-                                        label: option,
-                                        isSelected: .constant(selected == option)
-                                )
-                                .onTapGesture {
-                                        selected = option
+                                        isSelected: .init(
+                                                get: { selection == option.0 },
+                                                set: { _ in selection = option.0 }
+                                        ),
+                                        action: { selection = option.0 }
+                                ) {
+                                        Text(option.1)
                                 }
                         }
                 }
