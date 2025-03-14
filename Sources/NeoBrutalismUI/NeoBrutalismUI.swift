@@ -13,6 +13,7 @@ public typealias NeoBrutalButton = NeoBrutalButtonStyle
 public typealias NeoBrutalTextField = NeoBrutalTextFieldStyle
 public typealias NeoBrutalToggle = NeoBrutalToggleStyle
 public typealias NeoBrutalProgress = NeoBrutalProgressViewStyle
+public typealias NeoBrutalSlider = NeoBrutalSliderStyle
 
 // Convenient modifiers
 extension View {
@@ -30,5 +31,9 @@ extension View {
 
         public func neoBrutalProgressViewStyle() -> some View {
                 self.progressViewStyle(NeoBrutalProgressViewStyle())
+        }
+
+        public func neoBrutalSliderStyle() -> some View {
+                self.modifier(NeoBrutalSliderStyle())
         }
 }
